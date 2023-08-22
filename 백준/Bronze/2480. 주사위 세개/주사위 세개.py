@@ -10,9 +10,4 @@ else:
     elif T == F:
         print(1000+T*100)
     else:
-        if F > S and F > T:
-            print(F*100)
-        elif S > F and S > T:
-            print(S*100)
-        else:
-            print(T*100)
+        print(max(F, S, T)*100)
