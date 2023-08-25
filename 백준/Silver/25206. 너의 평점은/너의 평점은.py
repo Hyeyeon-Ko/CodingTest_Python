@@ -5,11 +5,9 @@ total_point = 0
 
 for _ in range(20):
     name, point, grade = input().split()
-    total_point += float(point)
 
-    if grade == 'P':
-        total_point -= float(point)
-    else:
+    if grade != 'P':
+        total_point += float(point)
         for i in grade_list:
             if i == grade:
                 total_score += float(point) * score_list[grade_list.index(i)]
