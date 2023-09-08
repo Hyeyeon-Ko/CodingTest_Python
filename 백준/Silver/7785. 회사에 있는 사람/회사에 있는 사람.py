@@ -1,20 +1,22 @@
 import sys
-input = sys.stdin.readline
 
-n = int(input())
-dict1 = {}
 
+n = int(sys.stdin.readline())
+temp = dict() # 딕셔너리 형
+
+# 반복문을 통해 출입 기록울 확인한다.
 for _ in range(n):
-    name, check = map(str, input().split())
-    if check == "enter":
-        dict1[name] = 1
-    else:
-        dict1[name] = 0
+    a, b = map(str, sys.stdin.readline().split())
 
-dict2 = dict(sorted(dict1.items(), reverse=True))
-
-for key, value in dict2.items():
-    if value == 1:
-        print(key)
+    # 출입을 했으면 딕셔너리로 받는다.
+    if b == "enter":
+        temp[a] = b
+    # 퇴근을 했으면 삭제해준다.
     else:
-        continue
+        del temp[a]
+
+# 사전 순의 역순으로 정렬한다.
+temp = sorted(temp.keys(), reverse=True)
+
+for i in temp:
+    print(i)
