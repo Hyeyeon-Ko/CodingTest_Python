@@ -1,43 +1,45 @@
-import sys
-input = sys.stdin.readline
-
-def merge_sort(L):
-    if len(L) == 1:
-        return L
+def merge_sort(A, p, r):
+    if(p < r and count <= K):
+        q = (p + r) // 2;
+        merge_sort(A, p , q)
+        merge_sort(A, q + 1, r)
+        merge(A, p, q, r)
+        
+def merge(A, p, q, r):
+    global count, result
+    i, j = p, q + 1
+    tmp = []
     
-    mid = (len(L)+1)//2
-   
-    left = merge_sort(L[:mid])
-    right = merge_sort(L[mid:])
-    
-    i,j = 0,0
-    L2 = []
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            L2.append(left[i])
-            ans.append(left[i])
-            i+=1
+    while i <= q and j <= r:
+        if(A[i] <= A[j]):
+            tmp.append(A[i])
+            i += 1
         else:
-            L2.append(right[j])
-            ans.append(right[j])
-            j+=1
-    while i < len(left):
-        L2.append(left[i])
-        ans.append(left[i])
-        i+=1
-    while j < len(right):
-        L2.append(right[j])
-        ans.append(right[j])
-        j+=1
+            tmp.append(A[j])
+            j += 1
+        
+    while i <= q:
+        tmp.append(A[i])
+        i += 1
     
-    return L2
+    while j <= r:
+        tmp.append(A[j])
+        j += 1
+    
+    i, t = p, 0;
+    
+    while i <= r:
+        A[i] = tmp[t]
+        count += 1
+        if count == K:
+            result = A[i]
+            break;
+        i += 1
+        t += 1
 
-n, k = map(int,input().split())
-a = list(map(int,input().split()))
-ans = []
-merge_sort(a)
-
-if len(ans) >= k:
-    print(ans[k-1])
-else:
-    print(-1)
+N, K = map(int, input().split())
+A = list(map(int, input().split()))
+count = 0
+result = -1
+merge_sort(A, 0, N - 1)
+print(result)
