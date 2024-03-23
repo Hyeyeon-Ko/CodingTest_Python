@@ -3,16 +3,19 @@ from collections import deque
 input = sys.stdin.readline
 
 n = int(input())
-q = deque(enumerate(map(int, input().split())))
-ans = []
+queue = deque(range(1, int(n+1)))
+arr = list(map(int, input().split()))
 
-while q:
-    idx, paper = q.popleft()
-    ans.append(idx + 1)
+res = []
 
-    if paper > 0:
-        q.rotate(-(paper - 1))
-    elif paper < 0:
-        q.rotate(-paper)
+while queue:
+    num = queue.popleft()
+    res.append(num)
 
-print(' '.join(map(str, ans)))
+    move = arr[num-1]
+    if move > 0:
+        queue.rotate(-(move-1))
+    else:
+        queue.rotate(-move)
+
+print(' '.join(map(str,res)))
